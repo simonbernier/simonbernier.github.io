@@ -4,7 +4,7 @@
 
 title: blank # the website title (if blank, full name will be used instead)
 first_name: Simon
-middle_name: 
+middle_name: blank
 last_name: Bernier
 contact_note: >
   You can even add a little note about which of these is the best way to reach you.
@@ -15,7 +15,7 @@ footer_text: >
   Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
   Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
 keywords: jekyll, jekyll-theme, academic-website, portfolio-website # add your own keywords or leave empty
-lang: fr # the language of your site (for example: en, fr, cn, ru, etc.)
+lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: ⚛️ # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
 url: https://simonbernier.github.io # the base hostname & protocol for your site
@@ -122,13 +122,13 @@ disqus_shortname: al-folio # put your disqus shortname
 # External sources.
 # If you have blog posts published on medium.com or other external sources,
 # you can display them in your blog by adding a link to the RSS feed.
-#external_sources:
-#  - name: medium.com
-#    rss_url: https://medium.com/@al-folio/feed
-#  - name: Google Blog
-#    posts:
-#      - url: https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/
-#        published_date: 2024-05-14
+external_sources:
+  - name: medium.com
+    rss_url: https://medium.com/@al-folio/feed
+  - name: Google Blog
+    posts:
+      - url: https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/
+        published_date: 2024-05-14
 
 # -----------------------------------------------------------------------------
 # Newsletter
