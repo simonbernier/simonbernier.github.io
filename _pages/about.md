@@ -1,8 +1,8 @@
 ---
-layout: À propos
-title: À propos
+layout: about
+title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>.
+subtitle: <a href='#'>Collège Jean-de-Brébeuf | Université McGill</a>.
 
 profile:
   align: right
