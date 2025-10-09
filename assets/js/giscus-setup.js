@@ -19,7 +19,7 @@ function determineGiscusTheme() {
   let giscusAttributes = {
     src: "https://giscus.app/client.js",
     "data-repo": "simonbernier/simonbernier.github.io",
-    "data-repo-id": "",
+    "data-repo-id": "R_kgDOP-2TcQ",
     "data-category": "Comments",
     "data-category-id": "",
     "data-mapping": "title",
@@ -28,7 +28,7 @@ function determineGiscusTheme() {
     "data-emit-metadata": "0",
     "data-input-position": "bottom",
     "data-theme": giscusTheme,
-    "data-lang": "en",
+    "data-lang": "fr",
     crossorigin: "anonymous",
     async: true,
   };
