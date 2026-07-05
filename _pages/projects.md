@@ -1,5 +1,6 @@
 ---
 layout: page
+published: false # page is disabled for now; delete this line to bring back the projects page
 title: projects
 permalink: /projects/
 description: A growing collection of your cool projects.

@@ -1,5 +1,6 @@
 ---
 layout: default
+published: false # page is disabled for now; delete this line to bring back the blog page
 permalink: /blog/
 title: blog
 nav: true
