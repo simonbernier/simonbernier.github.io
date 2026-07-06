@@ -15,7 +15,7 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 
 latest_posts:
-  enabled: true
+  enabled: false # set to true once the blog page (_pages/blog.md) is re-enabled, otherwise the heading links to a missing /blog/ page
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
 ---
