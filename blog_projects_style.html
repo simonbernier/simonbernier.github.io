@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide: Adding Blog Posts, Projects &amp; Changing the Style — simonbernier.github.io</title>
+<style>
+  :root {
+    --bg: #ffffff; --text: #1c1c1d; --muted: #6b6b6b; --accent: #b509ac;
+    --code-bg: #f4f4f5; --border: #e2e2e6; --card: #fafafa; --warn-bg: #fff8d8; --warn-border: #e7c000;
+    --tip-bg: #e2f5ec; --tip-border: #42b983;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1c1d; --text: #e8e8e8; --muted: #a0a0a0; --accent: #e06fdb;
+      --code-bg: #2b2b2e; --border: #3a3a3e; --card: #242427; --warn-bg: #3a3411; --warn-border: #b29400;
+      --tip-bg: #17352a; --tip-border: #359469;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto; max-width: 860px; padding: 2rem 1.25rem 4rem;
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6; background: var(--bg); color: var(--text);
+  }
+  h1 { font-size: 1.9rem; line-height: 1.25; margin-bottom: 0.25rem; }
+  h2 { font-size: 1.4rem; margin-top: 2.75rem; padding-bottom: 0.3rem; border-bottom: 2px solid var(--accent); }
+  h3 { font-size: 1.1rem; margin-top: 1.75rem; }
+  .subtitle { color: var(--muted); margin-top: 0; }
+  a { color: var(--accent); }
+  code {
+    background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px;
+    font-family: Consolas, "Courier New", monospace; font-size: 0.9em;
+  }
+  pre {
+    background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 0.9rem 1rem; overflow-x: auto; line-height: 1.45;
+  }
+  pre code { background: none; padding: 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.95rem; }
+  th, td { border: 1px solid var(--border); padding: 0.5rem 0.7rem; text-align: left; vertical-align: top; }
+  th { background: var(--card); }
+  .toc { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; margin-top: 1.5rem; }
+  .toc ol { margin: 0.5rem 0 0; padding-left: 1.25rem; }
+  .toc li { margin: 0.25rem 0; }
+  .warn, .tip {
+    border-left: 4px solid var(--warn-border); background: var(--warn-bg);
+    padding: 0.7rem 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0;
+  }
+  .tip { border-left-color: var(--tip-border); background: var(--tip-bg); }
+  .warn strong, .tip strong { display: block; margin-bottom: 0.2rem; }
+  .step { counter-increment: step; }
+  ol.steps { list-style: none; counter-reset: step; padding-left: 0; }
+  ol.steps > li {
+    position: relative; padding-left: 2.4rem; margin: 1rem 0;
+  }
+  ol.steps > li::before {
+    content: counter(step); counter-increment: step;
+    position: absolute; left: 0; top: 0.1rem;
+    width: 1.7rem; height: 1.7rem; border-radius: 50%;
+    background: var(--accent); color: #fff; font-weight: 700; font-size: 0.9rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  footer { margin-top: 3.5rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<h1>Adding Blog Posts, Projects &amp; Changing the Style</h1>
+<p class="subtitle">A practical guide for <strong>simonbernier.github.io</strong> (Jekyll + al-folio theme) — written 5&nbsp;July&nbsp;2026.</p>
+
+<nav class="toc">
+  <strong>Contents</strong>
+  <ol>
+    <li><a href="#how-it-works">How your site works (30-second version)</a></li>
+    <li><a href="#golden-rules">Golden rules — how to never break the site</a></li>
+    <li><a href="#blog">Adding blog posts</a></li>
+    <li><a href="#projects">Adding projects</a></li>
+    <li><a href="#style">Changing the style</a></li>
+    <li><a href="#preview">Previewing your changes</a></li>
+    <li><a href="#troubleshooting">Troubleshooting</a></li>
+  </ol>
+</nav>
+
+<h2 id="how-it-works">1. How your site works (30-second version)</h2>
+<p>Your repository holds <em>source files</em> (Markdown text + settings). Every time you push to the <code>main</code> branch on GitHub, a robot (GitHub Actions) runs <strong>Jekyll</strong>, which converts those files into the finished website and publishes it. You never edit HTML pages of the site directly — you edit Markdown files and Jekyll does the rest.</p>
+<table>
+  <tr><th>Folder / file</th><th>What it is</th></tr>
+  <tr><td><code>_pages/</code></td><td>The site's main pages: about (homepage), cv, publications, blog, projects.</td></tr>
+  <tr><td><code>_posts/</code></td><td>Your published blog posts. One file = one post.</td></tr>
+  <tr><td><code>_drafts/</code></td><td>Unpublished posts. Invisible on the live site. Currently holds 31 theme examples you can learn from.</td></tr>
+  <tr><td><code>_projects/</code></td><td>Your project entries. One file = one project card.</td></tr>
+  <tr><td><code>_bibliography/papers.bib</code></td><td>Your publications (BibTeX). Feeds the publications page.</td></tr>
+  <tr><td><code>assets/img/</code></td><td>Images used by pages, posts and projects.</td></tr>
+  <tr><td><code>_sass/</code></td><td>The stylesheets — colors, fonts, spacing (see <a href="#style">section 5</a>).</td></tr>
+  <tr><td><code>_config.yml</code></td><td>Site-wide settings. Small edits, big effects — change one thing at a time.</td></tr>
+  <tr><td><code>_layouts/</code>, <code>_includes/</code></td><td>The theme's page templates. You rarely need to touch these.</td></tr>
+  <tr><td><code>_site/</code></td><td>Generated output of a local build. Never edit it; it is ignored by git and rebuilt from scratch every time.</td></tr>
+</table>
+
+<h2 id="golden-rules">2. Golden rules — how to never break the site</h2>
+<ol class="steps">
+  <li><strong>Make changes on a branch, not directly on <code>main</code>.</strong> Create a branch (<code>git checkout -b my-change</code>), push it, and open a Pull Request on GitHub. The <em>Deploy site</em> check builds your version <strong>without publishing it</strong> — if the check is green, merging is safe.</li>
+  <li><strong>Never change the filename or <code>permalink</code> of something already published.</strong> That changes its web address and breaks links people may have saved.</li>
+  <li><strong>Name files in lowercase with hyphens, no spaces or accents:</strong> <code>ma-premiere-eval.md</code>, not <code>Ma Première Éval.md</code>. (Filenames become URLs.)</li>
+  <li><strong>One logical change per commit</strong>, with a message saying why. If something breaks, <code>git revert</code> undoes exactly that change.</li>
+  <li><strong>Don't commit stray files to the repository root.</strong> Anything not listed under <code>exclude:</code> in <code>_config.yml</code> gets published on the live site. (This guide is in the exclude list for that reason.)</li>
+</ol>
+
+<h2 id="blog">3. Adding blog posts</h2>
+
+<h3>One-time setup: re-enable the blog page</h3>
+<p>The blog page exists but is switched off. Open <code>_pages/blog.md</code> and delete this single line near the top, then commit:</p>
+<pre><code>published: false # page is disabled for now; ...</code></pre>
+<p>That restores the <strong>blog</strong> tab in the navigation bar and the post list at <code>/blog/</code>.</p>
+<div class="tip"><strong>Also do this:</strong> in <code>_pages/about.md</code>, set <code>latest_posts: enabled: true</code> to bring back the "latest posts" section on your homepage — it was turned off while the blog page was disabled so it wouldn't link to a missing page.</div>
+
+<h3>Writing a post</h3>
+<ol class="steps">
+  <li>Create a file in <code>_posts/</code> named <strong><code>YYYY-MM-DD-short-title.md</code></strong> (the date prefix is mandatory — Jekyll silently ignores files without it). Example: <code>2026-07-10-fine-tuning-basics.md</code>.</li>
+  <li>Start the file with <em>front matter</em> (the block between <code>---</code> lines), then write your text in Markdown below it:
+<pre><code>---
+layout: post
+title: "Les bases du fine-tuning"
+date: 2026-07-10
+description: "Ce que j'ai appris en ajustant mon premier modèle."
+tags: [ia, apprentissage]
+categories: ia-securite
+---
+
+Votre texte ici, en Markdown. **Gras**, *italique*,
+[liens](https://example.com), listes, etc.
+</code></pre></li>
+  <li>Commit, push, done. The post's address will be <code>/blog/2026/fine-tuning-basics/</code> (year + filename, from the <code>permalink</code> setting in <code>_config.yml</code>).</li>
+</ol>
+
+<h3>Useful extras</h3>
+<ul>
+  <li><strong>Not ready to publish?</strong> Put the file in <code>_drafts/</code> instead (date prefix optional there). Drafts never appear on the live site. Move the file to <code>_posts/</code> when ready.</li>
+  <li><strong>Learn from the examples:</strong> the 31 files in <code>_drafts/</code> are theme demos showing math (<code>2015-10-20-math.md</code>), code blocks, images, tables of contents, charts, and more. Open one, copy the front-matter options you need into your own post.</li>
+  <li><strong>Images:</strong> put them in <code>assets/img/</code> and reference them with:
+<pre><code>{% include figure.liquid path="assets/img/mon-image.jpg" class="img-fluid rounded" %}</code></pre>
+  or plain Markdown: <code>![description](/assets/img/mon-image.jpg)</code>.</li>
+  <li><strong>Math:</strong> already enabled site-wide. Write <code>$$ E = mc^2 $$</code> for display math.</li>
+  <li><strong>Tag buttons on the blog page:</strong> <code>display_tags</code> and <code>display_categories</code> in <code>_config.yml</code> still list the theme's demo tags — replace them with the tags you actually use (or leave empty lists).</li>
+</ul>
+<div class="warn"><strong>Watch out:</strong> a post dated in the future won't appear until that date passes. If a new post is missing, check its date and filename format first.</div>
+
+<h2 id="projects">4. Adding projects</h2>
+
+<h3>One-time setup (two small edits)</h3>
+<ol class="steps">
+  <li>In <code>_pages/projects.md</code>, delete the <code>published: false ...</code> line — this restores the <strong>projects</strong> tab and the card grid at <code>/projects/</code>.</li>
+  <li>In <code>_config.yml</code>, find the <code>collections:</code> block and change <code>output: false</code> to <code>output: true</code> for projects. Why: each project card links to its own detail page; with <code>output: false</code> those pages don't exist and every card would lead to a dead link.</li>
+</ol>
+
+<h3>Creating a project</h3>
+<p>Create a file in <code>_projects/</code>, e.g. <code>eval-llm-securite.md</code>:</p>
+<pre><code>---
+layout: page
+title: "Évaluation de sécurité d'un LLM"
+description: "Une phrase qui apparaît sur la carte du projet."
+img: assets/img/mon-projet.jpg   # optional card image; omit the line for no image
+importance: 1                    # 1 shows first, 2 second, ...
+category: work                   # must be one of the categories below
+---
+
+Full description of the project in Markdown — goals, methods, results, links.
+</code></pre>
+<ul>
+  <li><strong>Categories:</strong> the projects page groups cards by the list in <code>_pages/projects.md</code> front matter: <code>display_categories: [work, fun]</code>. Rename these to whatever suits you (e.g. <code>[ia-securite, physique]</code>) — just make each project's <code>category:</code> match one of them.</li>
+  <li><strong>The demo projects:</strong> <code>_projects/1_project.md</code> … <code>9_project.md</code> are theme examples. Delete them (or keep one as a template) before you re-enable the page, otherwise they'll appear alongside your real work.</li>
+</ul>
+
+<h2 id="style">5. Changing the style</h2>
+
+<h3>Easy wins — settings in <code>_config.yml</code></h3>
+<table>
+  <tr><th>Setting</th><th>Effect</th></tr>
+  <tr><td><code>icon: ⚛️</code></td><td>The favicon (browser-tab icon). Any emoji works.</td></tr>
+  <tr><td><code>max_width: 930px</code></td><td>How wide the content column is.</td></tr>
+  <tr><td><code>blog_name</code>, <code>blog_description</code></td><td>Title and subtitle shown at the top of the blog page ("Le blog / un espace pour apprendre et partager").</td></tr>
+  <tr><td><code>footer_text</code>, <code>description</code></td><td>Footer line and the site description used by search engines — both still contain theme placeholder text you may want to personalize.</td></tr>
+  <tr><td><code>enable_darkmode: true</code></td><td>Shows the light/dark toggle in the navbar.</td></tr>
+</table>
+
+<h3>Colors — <code>_sass/_themes.scss</code> and <code>_sass/_variables.scss</code></h3>
+<p>The single most visible choice is the <strong>accent color</strong> (links, buttons, highlights). It is set in <code>_sass/_themes.scss</code>, once for light mode (the <code>:root</code> block) and once for dark mode (the <code>html[data-theme="dark"]</code> block further down):</p>
+<pre><code>--global-theme-color: #{$purple-color};   /* the accent color  */
+--global-hover-color: #{$purple-color};   /* links on hover    */</code></pre>
+<p>Swap <code>$purple-color</code> for any variable defined in <code>_sass/_variables.scss</code> (<code>$blue-color</code>, <code>$green-color</code>, <code>$red-color</code>, …), or define your own there first:</p>
+<pre><code>$mcgill-red: #ed1b2f !default;</code></pre>
+<p>then use <code>#{$mcgill-red}</code> in <code>_themes.scss</code>. Change one value, rebuild/preview, judge, repeat.</p>
+
+<h3>Which stylesheet does what</h3>
+<table>
+  <tr><th>File</th><th>Controls</th></tr>
+  <tr><td><code>_sass/_variables.scss</code></td><td>The color palette and basic measurements — edit values here first.</td></tr>
+  <tr><td><code>_sass/_themes.scss</code></td><td>Which colors are used where, separately for light and dark mode.</td></tr>
+  <tr><td><code>_sass/_base.scss</code></td><td>Everyday elements: text, headings, links, tables, figures, post list. Add your own custom CSS rules at the end of this file.</td></tr>
+  <tr><td><code>_sass/_layout.scss</code></td><td>Page structure: header, footer, spacing.</td></tr>
+  <tr><td><code>_sass/_cv.scss</code>, <code>_distill.scss</code>, <code>_tabs.scss</code></td><td>Styles specific to the CV page, Distill-style posts, and tab widgets.</td></tr>
+</table>
+
+<h3>Fonts</h3>
+<p>The theme loads Roboto from Google Fonts. To change it, edit the <code>google_fonts</code> URL under <code>third_party_libraries:</code> in <code>_config.yml</code> (pick a font on <a href="https://fonts.google.com">fonts.google.com</a> and copy its CSS URL), then update the <code>font-family</code> rule in <code>_sass/_base.scss</code>.</p>
+
+<div class="tip"><strong>More recipes:</strong> the repo's own <code>CUSTOMIZE.md</code> file documents every theme option in detail — it's the theme's official customization manual.</div>
+
+<h2 id="preview">6. Previewing your changes</h2>
+
+<h3>Option A — locally (fast feedback)</h3>
+<p>Ruby is installed on this computer (since 5 July 2026). From the repository folder, run:</p>
+<pre><code>bundle exec jekyll serve --disable-disk-cache</code></pre>
+<p>then open <a href="http://localhost:4000">http://localhost:4000</a>. The site rebuilds automatically each time you save a file (refresh the browser). Press <code>Ctrl+C</code> to stop.</p>
+<div class="warn"><strong>Two known local limitations</strong> (harmless): responsive image generation (needs ImageMagick) and JavaScript minification (needs Node.js) are skipped locally. GitHub performs both when it builds the real site, so the live result can look marginally more polished than your preview.</div>
+
+<h3>Option B — the safety net (recommended for anything risky)</h3>
+<ol class="steps">
+  <li><code>git checkout -b my-change</code> — work on a branch.</li>
+  <li>Commit and <code>git push -u origin my-change</code>.</li>
+  <li>Open a Pull Request on GitHub. The <em>Deploy site</em> check does a complete production build <strong>without publishing anything</strong>.</li>
+  <li>Green check → merge → the live site updates in ~2 minutes. Red check → click it to read the error; the live site is untouched.</li>
+</ol>
+
+<h2 id="troubleshooting">7. Troubleshooting</h2>
+<table>
+  <tr><th>Symptom</th><th>Most likely cause</th></tr>
+  <tr><td>New post doesn't appear</td><td>Filename missing the <code>YYYY-MM-DD-</code> prefix, or the date is in the future, or the file is in <code>_drafts/</code>.</td></tr>
+  <tr><td>Site didn't update after pushing</td><td>Check the <em>Actions</em> tab on GitHub — the build may still be running or may have failed (open the log; the error message names the file at fault).</td></tr>
+  <tr><td>Page shows raw <code>{% ... %}</code> text</td><td>A typo in a Liquid tag — compare against the example you copied from.</td></tr>
+  <tr><td>Whole site looks broken after a config change</td><td>YAML is indentation-sensitive: check you used spaces (never tabs) and kept the exact indentation of neighbouring lines. Revert the commit if unsure.</td></tr>
+  <tr><td>Old page still shows in the browser</td><td>Hard refresh (<code>Ctrl+F5</code>) — browsers cache aggressively.</td></tr>
+</table>
+
+<footer>
+  Generated for Simon Bernier's site maintenance — kept out of the published site via the <code>exclude:</code> list in <code>_config.yml</code>. Companion references in the repo: <code>CUSTOMIZE.md</code> (all theme options), <code>FAQ.md</code>, and the example posts in <code>_drafts/</code>.
+</footer>
+
+</body>
+</html>
