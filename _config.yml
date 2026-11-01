@@ -133,7 +133,7 @@ newsletter:
 
 collections:
   projects:
-    output: false # change to true when re-enabling the projects page, so each project gets its own detail page
+    output: true # change to true when re-enabling the projects page, so each project gets its own detail page
 
 # -----------------------------------------------------------------------------
 # Jekyll settings
@@ -237,8 +237,8 @@ jekyll-archives:
       tags: "/blog/:type/:name/"
       categories: "/blog/:type/:name/"
 
-display_tags: ["formatting", "images", "links", "math", "code", "blockquotes"] # these tags will be displayed on the front page of your blog
-display_categories: ["external-services"] # these categories will be displayed on the front page of your blog
+display_tags: ["physics", "ai-safety"] # these tags will be displayed on the front page of your blog
+display_categories: ["physics","ai-safety"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar
