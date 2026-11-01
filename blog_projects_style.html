@@ -88,7 +88,8 @@
   <tr><th>Folder / file</th><th>What it is</th></tr>
   <tr><td><code>_pages/</code></td><td>The site's main pages: about (homepage), cv, publications, blog, projects.</td></tr>
   <tr><td><code>_posts/</code></td><td>Your published blog posts. One file = one post.</td></tr>
-  <tr><td><code>_drafts/</code></td><td>Unpublished posts. Invisible on the live site. Currently holds 31 theme examples you can learn from.</td></tr>
+  <tr><td><code>_drafts/</code></td><td>Your unpublished posts. Invisible on the live site.</td></tr>
+  <tr><td><code>_examples/</code></td><td>31 theme demo posts to learn from. Never built or published.</td></tr>
   <tr><td><code>_projects/</code></td><td>Your project entries. One file = one project card.</td></tr>
   <tr><td><code>_bibliography/papers.bib</code></td><td>Your publications (BibTeX). Feeds the publications page.</td></tr>
   <tr><td><code>assets/img/</code></td><td>Images used by pages, posts and projects.</td></tr>
@@ -137,7 +138,7 @@ Votre texte ici, en Markdown. **Gras**, *italique*,
 <h3>Useful extras</h3>
 <ul>
   <li><strong>Not ready to publish?</strong> Put the file in <code>_drafts/</code> instead (date prefix optional there). Drafts never appear on the live site. Move the file to <code>_posts/</code> when ready.</li>
-  <li><strong>Learn from the examples:</strong> the 31 files in <code>_drafts/</code> are theme demos showing math (<code>2015-10-20-math.md</code>), code blocks, images, tables of contents, charts, and more. Open one, copy the front-matter options you need into your own post.</li>
+  <li><strong>Learn from the examples:</strong> the 31 files in <code>_examples/</code> are theme demos showing math (<code>2015-10-20-math.md</code>), code blocks, images, tables of contents, charts, and more. Open one, copy the front-matter options you need into your own post.</li>
   <li><strong>Images:</strong> put them in <code>assets/img/</code> and reference them with:
 <pre><code>{% include figure.liquid path="assets/img/mon-image.jpg" class="img-fluid rounded" %}</code></pre>
   or plain Markdown: <code>![description](/assets/img/mon-image.jpg)</code>.</li>
@@ -210,9 +211,9 @@ Full description of the project in Markdown — goals, methods, results, links.
 <h2 id="preview">6. Previewing your changes</h2>
 
 <h3>Option A — locally (fast feedback)</h3>
-<p>Ruby is installed on this computer (since 5 July 2026). From the repository folder, run:</p>
-<pre><code>bundle exec jekyll serve --disable-disk-cache</code></pre>
-<p>then open <a href="http://localhost:4000">http://localhost:4000</a>. The site rebuilds automatically each time you save a file (refresh the browser). Press <code>Ctrl+C</code> to stop.</p>
+<p>Ruby 3.3 is installed in <code>C:\Ruby33-x64</code> (reinstalled 1 November 2026). From the repository folder, run:</p>
+<pre><code>bundle exec jekyll serve --drafts --disable-disk-cache</code></pre>
+<p>then open <a href="http://localhost:4000">http://localhost:4000</a>. <code>--drafts</code> includes the posts in <code>_drafts/</code>; leave it out to preview exactly what will be published. The site rebuilds automatically each time you save a file (refresh the browser). Press <code>Ctrl+C</code> to stop.</p>
 <div class="warn"><strong>Two known local limitations</strong> (harmless): responsive image generation (needs ImageMagick) and JavaScript minification (needs Node.js) are skipped locally. GitHub performs both when it builds the real site, so the live result can look marginally more polished than your preview.</div>
 
 <h3>Option B — the safety net (recommended for anything risky)</h3>
@@ -226,6 +227,7 @@ Full description of the project in Markdown — goals, methods, results, links.
 <h2 id="troubleshooting">7. Troubleshooting</h2>
 <table>
   <tr><th>Symptom</th><th>Most likely cause</th></tr>
+  <tr><td><code>ERR_CONNECTION_REFUSED</code> on localhost:4000</td><td>The local build crashed, so the server never started. Scroll up in the terminal to the red <code>ERROR: YOUR SITE COULD NOT BE BUILT</code> block; it names the file at fault. (Red ImageMagick and Terser lines are harmless.)</td></tr>
   <tr><td>New post doesn't appear</td><td>Filename missing the <code>YYYY-MM-DD-</code> prefix, or the date is in the future, or the file is in <code>_drafts/</code>.</td></tr>
   <tr><td>Site didn't update after pushing</td><td>Check the <em>Actions</em> tab on GitHub — the build may still be running or may have failed (open the log; the error message names the file at fault).</td></tr>
   <tr><td>Page shows raw <code>{% ... %}</code> text</td><td>A typo in a Liquid tag — compare against the example you copied from.</td></tr>
@@ -234,7 +236,7 @@ Full description of the project in Markdown — goals, methods, results, links.
 </table>
 
 <footer>
-  Generated for Simon Bernier's site maintenance — kept out of the published site via the <code>exclude:</code> list in <code>_config.yml</code>. Companion references in the repo: <code>CUSTOMIZE.md</code> (all theme options), <code>FAQ.md</code>, and the example posts in <code>_drafts/</code>.
+  Generated for Simon Bernier's site maintenance — kept out of the published site via the <code>exclude:</code> list in <code>_config.yml</code>. Companion references in the repo: <code>CUSTOMIZE.md</code> (all theme options), <code>FAQ.md</code>, and the example posts in <code>_examples/</code>.
 </footer>
 
 </body>
