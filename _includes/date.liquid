@@ -13,7 +13,10 @@
   {%- if day == '1' -%}
     {%- assign day = '1er' -%}
   {%- endif -%}
-  {{- day }} {{ month }} {{ include.date | date: '%Y' -}}
+  {{- day }}
+  {{ month }}
+  {{ include.date | date: '%Y' -}}
 {%- else -%}
-  {{- month }} {{ include.date | date: '%d' }}, {{ include.date | date: '%Y' -}}
+  {{- month }}
+  {{ include.date | date: '%d' }}, {{ include.date | date: '%Y' -}}
 {%- endif -%}

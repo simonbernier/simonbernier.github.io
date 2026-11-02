@@ -237,7 +237,7 @@ jekyll-archives:
       categories: "/blog/:type/:name/"
 
 display_tags: ["physics", "ai-safety"] # these tags will be displayed on the front page of your blog
-display_categories: ["physics","ai-safety"] # these categories will be displayed on the front page of your blog
+display_categories: ["physics", "ai-safety"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar

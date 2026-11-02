@@ -85,7 +85,12 @@
             {%- if forloop.last and author_array_limit == author_array_size -%}
               {%- assign last_listed = true -%}
             {%- endif -%}
-            {%- if forloop.length > 2 and last_listed and t.serial_comma == false %} {% elsif forloop.length > 2 %}, {% elsif forloop.length == 2 %}  {% endif %}
+            {%- if forloop.length > 2 and last_listed and t.serial_comma == false %}
+            {% elsif forloop.length > 2 -%}
+              ,
+            {% elsif forloop.length == 2 %}
+
+            {% endif %}
           {%- endif %}
           {%- if forloop.last and author_array_limit == author_array_size %}{{ t.and }} {% endif -%}
         {% endif %}
@@ -121,7 +126,8 @@
           {% endunless %}
         {%- endfor -%}
         {%- assign more_authors_show = more_authors_show | regex_replace: '([*∗†‡§¶‖&^]+)', '<sup>\1</sup>' -%}
-        {% if t.serial_comma %},{% endif %} {{ t.and }}
+        {% if t.serial_comma %},{% endif %}
+        {{ t.and }}
         <span
           class="more-authors"
           title="{{ t.click_to_view }} {{ more_authors_hide }}"
@@ -372,7 +378,7 @@
       <div class="bibtex hidden">
         {% highlight bibtex %}
         {{- entry.bibtex | hideCustomBibtex -}}
-        {% endhighlight %}
+      {% endhighlight %}
       </div>
     {% endif %}
 
