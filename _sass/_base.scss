@@ -234,6 +234,13 @@ ul.task-list input[type="checkbox"] {
   }
 }
 
+// Reserve the photo's 3:4 frame before it loads, so the text wrapping around it is laid out once
+.profile img {
+  display: block;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
 .profile.float-right {
   margin-left: 1rem;
 }
@@ -275,6 +282,9 @@ ul.task-list input[type="checkbox"] {
   border-bottom: 1px solid var(--global-divider-color);
   background-color: var(--global-bg-color);
   opacity: 0.95;
+  // Bootstrap's line height keeps the navbar at the 57px that body.fixed-top-nav reserves;
+  // the body's taller line height made it 60px and progress-bar.js then pushed the page down 3px after load
+  line-height: 1.5;
 }
 
 .navbar .dropdown-menu {
@@ -420,6 +430,20 @@ ul.task-list input[type="checkbox"] {
   &:hover {
     color: var(--global-hover-color);
   }
+}
+
+// Icon fonts load after the first paint, and an icon's width changes when its glyph arrives.
+// Fix the width of icons sitting next to text so that text doesn't slide sideways on load.
+#light-toggle {
+  width: 1.5rem;
+  text-align: center;
+}
+
+.tag-category-list i,
+.post-tags i,
+.post-meta i {
+  width: 1em;
+  text-align: center;
 }
 
 // Social (bottom)
@@ -703,6 +727,13 @@ footer.sticky-bottom {
     img {
       width: 100%;
     }
+
+    // A fixed frame sizes the card before the thumbnail loads, so nothing moves when it arrives
+    img.card-img {
+      display: block;
+      aspect-ratio: 3 / 2;
+      object-fit: contain;
+    }
   }
 
   .col {
@@ -969,7 +1000,7 @@ progress {
   /* Positioning */
   position: fixed;
   left: 0;
-  top: 56px;
+  top: 57px; // below the 57px navbar (56px + 1px border), as progress-bar.js measures it
   z-index: 10;
 
   /* Dimensions */
@@ -1007,7 +1038,7 @@ progress::-moz-progress-bar {
   width: 100%;
   background-color: transparent;
   position: fixed;
-  top: 56px;
+  top: 57px;
   left: 0;
   height: 5px;
   display: block;
