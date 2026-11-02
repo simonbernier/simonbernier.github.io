@@ -32,10 +32,20 @@ $grey-900: #212529;
 $white-color: #ffffff !default;
 $black-color: #000000 !default;
 
-// Theme colors
+// Theme colors (forest & lake palette)
 
-$code-bg-color-light: rgba($purple-color, 0.05);
-$code-bg-color-dark: #2c3237 !default;
+$lake-color: #2b6a87; // deep lake blue: links, accents
+$lake-color-light: #7cc0dd; // lake blue for dark mode
+$forest-color: #2f6b3f; // forest green: hover states
+$forest-color-light: #8fcf98; // forest green for dark mode
+$soft-black-color: #212529; // body text: high contrast without pure black glare
+$soft-grey-color: #5c6166; // secondary text
+$night-forest-color: #142019; // dark mode background
+$night-forest-card-color: #1b2a22;
+$deep-forest-color: #1f3a2e; // footer
+
+$code-bg-color-light: rgba($lake-color, 0.07);
+$code-bg-color-dark: #1f2e27 !default;
 
 // Font awesome location
 $fa-font-path: "../webfonts";
