@@ -38,9 +38,14 @@ permalink: /assets/js/footnote-popups.js
     box.classList.add("visible");
   }
 
+  function close() {
+    box.classList.remove("visible");
+    document.querySelectorAll('[aria-describedby="footnote-popup"]').forEach((a) => a.removeAttribute("aria-describedby"));
+  }
+
   function hide() {
     clearTimeout(hideTimer);
-    hideTimer = setTimeout(() => box.classList.remove("visible"), 150);
+    hideTimer = setTimeout(close, 150);
   }
 
   refs.forEach((ref) => {
@@ -48,12 +53,23 @@ permalink: /assets/js/footnote-popups.js
     ref.addEventListener("mouseleave", hide);
     ref.addEventListener("focus", () => show(ref));
     ref.addEventListener("blur", hide);
-    ref.addEventListener("click", () => box.classList.remove("visible"));
+    ref.addEventListener("click", close);
   });
   // keep the box open while the mouse is over it, so links inside it can be clicked
   box.addEventListener("mouseenter", () => clearTimeout(hideTimer));
   box.addEventListener("mouseleave", hide);
+  // park the box once it has faded out: a hidden box left where it was still widens the page
+  box.addEventListener("transitionend", (e) => {
+    if (e.propertyName === "visibility" && !box.classList.contains("visible")) {
+      box.style.left = "0px";
+      box.style.top = "0px";
+    }
+  });
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") box.classList.remove("visible");
+    if (e.key === "Escape") close();
+  });
+  // on touch screens, a tap outside the box closes it
+  document.addEventListener("pointerdown", (e) => {
+    if (!box.contains(e.target) && !e.target.closest("a.footnote")) close();
   });
 })();

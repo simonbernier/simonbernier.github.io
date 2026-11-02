@@ -1496,7 +1496,7 @@ sup[id^="fnref:"] {
   position: absolute;
   z-index: 1050;
   width: max-content;
-  max-width: min(400px, calc(100vw - 16px));
+  max-width: min(400px, calc(100% - 16px)); // 100% is the viewport minus its scrollbar, which the JS clamps to
   padding: 0.6rem 0.8rem;
   font-size: 0.875rem;
   line-height: 1.45;
