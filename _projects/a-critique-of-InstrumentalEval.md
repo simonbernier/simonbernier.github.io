@@ -5,8 +5,6 @@ description: "Replicating results of a benchmark on instrumental convergence."
 img: assets/img/projects/a-critique-of-InstrumentalEval/methods.png   # card image (optional)
 importance: 1                                   # 1 = shown first
 category: ai-safety                               # must match display_categories
-related_publications: true                      # optional, if there's a paper
-published: false                                # remove when ready
 ---
 
 > **Edit (November 2, 2026):** Reviewers in the [OpenReview discussion of InstrumentalEval](https://openreview.net/forum?id=Lw1m3lXYzW) independently raise many of the issues found here, and my findings still contradict most claims in the paper's edited version. Read the full write-up for details.
@@ -33,8 +31,9 @@ At first, InstrumentalEval's idea looks good, but upon replicating their results
    <script>
      // the page reports its height, so the iframe never scrolls
      window.addEventListener("message", (e) => {
-       if (e.data && e.data.type === "ir-explorer-height")
-         document.getElementById("ir-explorer").style.height = e.data.height + "px";
+       const frame = document.getElementById("ir-explorer");
+       if (e.source === frame.contentWindow && e.data && e.data.type === "ir-explorer-height")
+         frame.style.height = e.data.height + "px";
      });
    </script>
    <div class="caption">

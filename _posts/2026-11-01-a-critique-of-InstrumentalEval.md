@@ -4,7 +4,6 @@ title: "A Critique of InstrumentalEval"
 date: 2026-11-01
 tags: [ai-safety]
 categories: ai-safety
-published: false
 _styles: |
   .post pre, .post pre code { white-space: pre-wrap; overflow-wrap: anywhere; color: var(--global-text-color); }
   .post pre { font-size: 0.8rem; line-height: 1.45; padding: 0.75rem 1rem; }
