@@ -20,6 +20,15 @@ en:
   related_title: Enjoy Reading This Article?
   related_intro: "Here are some more articles you might like to read next:"
   present: Present
+  toggle_navigation: Toggle navigation
+  change_theme: Change theme
+  current: (current)
+  filter_placeholder: Type to filter
+  and: and
+  serial_comma: true # "A, B, and C"
+  more_author: more author
+  more_authors: more authors
+  click_to_view: click to view
 
 fr:
   home: /fr/
@@ -35,9 +44,18 @@ fr:
   by: par
   last_updated_on: mis à jour le
   references: Références
-  related_title: Vous avez aimé cet article?
-  related_intro: "Voici d'autres articles qui pourraient vous intéresser: "
+  related_title: "Vous avez aimé cet article ?"
+  related_intro: "Voici d'autres articles qui pourraient vous intéresser :"
   present: Présent
+  toggle_navigation: Afficher ou masquer la navigation
+  change_theme: Changer le thème
+  current: (page actuelle)
+  filter_placeholder: Tapez pour filtrer
+  and: et
+  serial_comma: false # "A, B et C"
+  more_author: autre auteur # no apostrophes: these go inside a JavaScript string in _layouts/bib.liquid
+  more_authors: autres auteurs
+  click_to_view: cliquer pour afficher
   categories: # project category headings
     ai-safety: sécurité-de-l'ia
     physics: physique
