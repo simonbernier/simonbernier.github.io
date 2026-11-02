@@ -1430,3 +1430,42 @@ figure.cover {
     color: #23212d !important;
   }
 }
+
+// Footnote jumps: clear the fixed navbar, and on return show ~4 lines of text above the reference
+.footnotes li[id^="fn:"] {
+  scroll-margin-top: 66px;
+}
+
+sup[id^="fnref:"] {
+  scroll-margin-top: calc(66px + 6rem);
+}
+
+// Footnote popups (_scripts/footnote-popups.js)
+.footnote-popup {
+  position: absolute;
+  z-index: 1050;
+  width: max-content;
+  max-width: min(400px, calc(100vw - 16px));
+  padding: 0.6rem 0.8rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--global-text-color);
+  background-color: var(--global-card-bg-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.12s,
+    visibility 0.12s;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
