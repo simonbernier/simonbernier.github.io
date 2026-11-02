@@ -218,3 +218,20 @@ ul.timeline li::before {
      color: var(--global-text-color);
 }
 */
+
+// At the 720px content width the 2-of-12 date column is too narrow for date ranges, so give it 30%
+@media (min-width: 768px) {
+  .cv .list-group-item .date-column {
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+
+  .cv .list-group-item .date-column + div {
+    flex: 0 0 70%;
+    max-width: 70%;
+  }
+}
+
+.cv p.location {
+  white-space: normal;
+}
