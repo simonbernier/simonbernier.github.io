@@ -28,6 +28,8 @@ $(document).ready(function () {
     Toc.init($myNav);
     $("body").scrollspy({
       target: navSelector,
+      // headings land 66px below the top (scroll-margin-top, for the fixed navbar), so count them as reached a bit past that
+      offset: 100,
     });
   }
 
