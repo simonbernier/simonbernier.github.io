@@ -1,0 +1,13 @@
+---
+---
+{% comment %}A plain reference-list entry for posts: {% bibliography --template reference %}{% endcomment %}
+{% if entry.doi %}
+  {% assign doi_url = 'https://doi.org/' | append: entry.doi %}
+  {% capture link %}<a href="{{ doi_url }}">{{ doi_url }}</a>{% endcapture %}
+  {{ reference | replace: doi_url, link }}
+{% elsif entry.url %}
+  {% capture link %}<a href="{{ entry.url }}">{{ entry.url }}</a>{% endcapture %}
+  {{ reference | replace: entry.url, link }}
+{% else %}
+  {{ reference }}
+{% endif %}
