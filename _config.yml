@@ -421,7 +421,7 @@ third_party_libraries:
     version: "5.5.0"
   google_fonts:
     url:
-      fonts: "https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Material+Icons&display=swap"
+      fonts: "https://fonts.googleapis.com/css2?family=Material+Icons&display=swap" # Atkinson Hyperlegible Next is self-hosted (_sass/_base.scss)
   highlightjs:
     integrity:
       css:
