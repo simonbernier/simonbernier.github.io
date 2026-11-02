@@ -1491,6 +1491,17 @@ sup[id^="fnref:"] {
   scroll-margin-top: calc(66px + 6rem);
 }
 
+// Reference lists in posts (_layouts/reference.liquid): citation jumps clear the navbar, and long URLs wrap on phones
+ol.bibliography {
+  [id] {
+    scroll-margin-top: 66px;
+  }
+
+  a {
+    overflow-wrap: anywhere;
+  }
+}
+
 // Footnote popups (_scripts/footnote-popups.js)
 .footnote-popup {
   position: absolute;
@@ -1519,4 +1530,9 @@ sup[id^="fnref:"] {
     opacity: 1;
     visibility: visible;
   }
+}
+
+// The InstrumentalEval methods figure is transparent with black labels: give it a white backing in dark mode
+html[data-theme="dark"] img[src*="a-critique-of-InstrumentalEval/methods"] {
+  background-color: $white-color;
 }
