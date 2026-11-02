@@ -2,7 +2,7 @@
   <!-- Nav Bar -->
   <nav id="navbar" class="navbar navbar-light navbar-expand-sm {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}" role="navigation">
     <div class="container">
-      {% if page.permalink != '/' %}
+      {% if page.layout != 'about' %}
         <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/">
           {% if site.title == 'blank' %}
             {% if site.first_name %}
@@ -42,15 +42,17 @@
 
       <div class="collapse navbar-collapse text-right" id="navbarNav">
         <ul class="navbar-nav ml-auto flex-nowrap">
-          {% for page in site.pages %}
-            {% if page.permalink == '/' %} {% assign about_title = page.title %} {% endif %}
+          <!-- Only pages in the current page's language (page_lang, from i18n.liquid) appear in the navbar -->
+          {% for p in site.pages %}
+            {% assign p_lang = p.lang | default: site.lang %}
+            {% if p.permalink == t.home and p_lang == page_lang %} {% assign about_title = p.title %} {% endif %}
           {% endfor %}
 
           <!-- About -->
-          <li class="nav-item {% if page.permalink == '/' %}active{% endif %}">
-            <a class="nav-link" href="{{ '/' | relative_url }}">
+          <li class="nav-item {% if page.layout == 'about' %}active{% endif %}">
+            <a class="nav-link" href="{{ t.home | relative_url }}">
               {{- about_title }}
-              {% if page.permalink == '/' %}
+              {% if page.layout == 'about' %}
                 <span class="sr-only">(current)</span>
               {% endif %}
             </a>
@@ -59,7 +61,8 @@
           <!-- Other pages -->
           {% assign sorted_pages = site.pages | sort: 'nav_order' %}
           {% for p in sorted_pages %}
-            {% if p.nav and p.autogen == null %}
+            {% assign p_lang = p.lang | default: site.lang %}
+            {% if p.nav and p.autogen == null and p_lang == page_lang %}
               {% if p.dropdown %}
                 {% assign has_active_child = false %}
                 {% for child in p.children %}
@@ -103,7 +106,7 @@
                   {%- if p.permalink contains '://' -%}
                     {%- assign url = p.permalink -%}
                   {%- elsif p.permalink contains '/blog/' -%}
-                    {%- assign url = '/blog/' -%}
+                    {%- assign url = parent_link -%}
                   {%- else -%}
                     {%- assign url = p.url -%}
                   {%- endif %}
@@ -117,6 +120,18 @@
               {% endif %}
             {% endif %}
           {% endfor %}
+          <!-- Language switch: to the page's translation, or else to the other language's home -->
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="{{ page.translation | default: site.data.i18n[other_lang].home | relative_url }}"
+              hreflang="{{ other_lang }}"
+              lang="{{ other_lang }}"
+              title="{{ site.data.i18n[other_lang].switch_title }}"
+            >
+              {{- other_lang | upcase -}}
+            </a>
+          </li>
           {% if site.search_enabled %}
             <!-- Search -->
             <li class="nav-item">

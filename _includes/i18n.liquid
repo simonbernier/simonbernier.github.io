@@ -1,0 +1,11 @@
+{% comment %}
+  Sets the current page's language (page_lang), its interface text (t) and the other language (other_lang).
+  Include at the top of each layout: assigned variables do not carry over between layouts.
+{% endcomment %}
+{%- assign page_lang = page.lang | default: site.lang -%}
+{%- assign t = site.data.i18n[page_lang] | default: site.data.i18n.en -%}
+{%- if page_lang == 'fr' -%}
+  {%- assign other_lang = 'en' -%}
+{%- else -%}
+  {%- assign other_lang = 'fr' -%}
+{%- endif -%}

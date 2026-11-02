@@ -1,0 +1,68 @@
+# Interface text for each language. Every page uses the set matching its `lang`
+# front matter (site.lang when absent), so a French post gets a French interface.
+# A key missing from a language falls back to the English default in the template
+# or to _config.yml (blog_name, footer_text).
+
+en:
+  home: /
+  switch_title: English version # shown on the button that switches *to* this language
+  months: [January, February, March, April, May, June, July, August, September, October, November, December]
+  months_short: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+  latest_posts: latest posts
+  no_posts: No posts so far...
+  news: news
+  selected_publications: selected publications
+  min_read: min read
+  created_on: Created on
+  by: by
+  last_updated_on: last updated on
+  references: References
+  related_title: Enjoy Reading This Article?
+  related_intro: "Here are some more articles you might like to read next:"
+  present: Present
+
+fr:
+  home: /fr/
+  switch_title: Version française
+  months: [janvier, février, mars, avril, mai, juin, juillet, août, septembre, octobre, novembre, décembre]
+  months_short: [janv., févr., mars, avr., mai, juin, juil., août, sept., oct., nov., déc.]
+  latest_posts: derniers blogs
+  no_posts: Aucun blog pour l'instant...
+  news: nouvelles
+  selected_publications: publications choisies
+  min_read: min de lecture
+  created_on: Publié le
+  by: par
+  last_updated_on: mis à jour le
+  references: Références
+  related_title: Vous avez aimé cet article?
+  related_intro: "Voici d'autres articles qui pourraient vous intéresser: "
+  present: Présent
+  categories: # project category headings
+    ai-safety: sécurité-de-l'ia
+    physics: physique
+  blog_name: mon blog
+  blog_description: mes pensées et ma recherche # subtitle under the blog title, e.g. "un espace pour apprendre et partager"; empty for none
+  footer_text: >
+    Propulsé par <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> avec le thème <a href="https://github.com/alshedivat/al-folio">al-folio</a>.
+    Hébergé par <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
+  cv_sections:
+    basics: Informations
+    education: Formation
+    work: Expérience
+    awards: Distinctions
+    certificates: Certificats
+    projects: Projets
+    publications: Publications
+    skills: Compétences
+    languages: Langues
+    volunteer: Bénévolat
+    interests: Intérêts
+    references: Références
+  cv_fields:
+    name: Nom
+    label: Titre
+    email: Courriel
+    phone: Téléphone
+    url: Site web
+    summary: Résumé

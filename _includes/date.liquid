@@ -1,0 +1,15 @@
+{% comment %}
+  Formats include.date in the page's language. Needs the variables set by i18n.liquid.
+  include.short: abbreviated month. English: "November 01, 2026" / "Nov 01, 2026"; French: "1 novembre 2026" / "1 nov. 2026".
+{% endcomment %}
+{%- assign month_index = include.date | date: '%-m' | minus: 1 -%}
+{%- if include.short -%}
+  {%- assign month = t.months_short[month_index] -%}
+{%- else -%}
+  {%- assign month = t.months[month_index] -%}
+{%- endif -%}
+{%- if page_lang == 'fr' -%}
+  {{- include.date | date: '%-d' }} {{ month }} {{ include.date | date: '%Y' -}}
+{%- else -%}
+  {{- month }} {{ include.date | date: '%d' }}, {{ include.date | date: '%Y' -}}
+{%- endif -%}

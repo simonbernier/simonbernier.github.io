@@ -1,7 +1,10 @@
 ---
 layout: default
 ---
-{% unless site.data.resume %}
+{% include i18n.liquid %}
+{% comment %}A page can name its JSON Resume data with `resume_data` (e.g. resume_fr for the French CV){% endcomment %}
+{% assign resume = site.data[page.resume_data] | default: site.data.resume %}
+{% unless resume %}
   <div class="post">
     <header class="post-header">
       <h1 class="post-title">
@@ -79,7 +82,7 @@ layout: default
 
     <article>
       <div class="cv">
-        {% for data in site.data.resume %}
+        {% for data in resume %}
           {% if site.jsonresume and site.jsonresume.size > 0 %}
             {% unless site.jsonresume contains data[0] %}
               {% continue %}
@@ -88,7 +91,8 @@ layout: default
           {% if data[0] == 'meta' or data[1].size == 0 %} {% continue %} {% endif %}
           <a class="anchor" id="{{ data[0] }}"></a>
           <div class="card mt-3 p-3">
-            <h3 class="card-title font-weight-medium">{{ data[0] | capitalize }}</h3>
+            {% assign section = data[0] %}
+            <h3 class="card-title font-weight-medium">{{ t.cv_sections[section] | default: section | capitalize }}</h3>
             <div>
               {% case data[0] %}
                 {% when 'basics' %}
