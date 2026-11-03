@@ -5,7 +5,16 @@ description: "Replicating results of a benchmark on instrumental convergence."
 img: assets/img/projects/a-critique-of-InstrumentalEval/thumbnail.png   # card image (optional)
 importance: 1                                   # 1 = shown first
 category: ai-safety                               # must match display_categories
+_styles: |
+  .post .project-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; margin: 0 0 1rem; font-size: 0.95rem; }
+  .post .project-links i { margin-right: 0.3rem; }
+  .post iframe.ir-explorer { display: block; width: min(1000px, calc(100vw - 32px)); max-width: none; margin-left: calc(50% - min(500px, 50vw - 16px)); }
 ---
+
+<div class="project-links">
+  <a href="{% post_url 2026-11-01-a-critique-of-InstrumentalEval %}"><i class="fa-solid fa-file-lines"></i>Full write-up</a>
+  <a href="https://github.com/simonbernier/instrumentalEval-replication"><i class="fa-brands fa-github"></i>Code on GitHub</a>
+</div>
 
 > **Edit (November 2, 2026):** Reviewers in the [OpenReview discussion of InstrumentalEval](https://openreview.net/forum?id=Lw1m3lXYzW) independently raise many of the issues found here, and my findings still contradict most claims in the paper's edited version. Read the full write-up for details.
 {: .block-warning }
@@ -25,9 +34,9 @@ InstrumentalEval has a simple evaluation pipeline as presented in the figure bel
 
 At first, InstrumentalEval's idea looks good, but upon replicating their results, I generated model responses that do not support the paper's conclusions. The interactive figure below lets us investigate the LLMs responses to the benchmark, with respect to different system prompts and different ways of evaluating instrumental convergence. The paper's reported results are shown under the "+ nudge (full prompt)" and "GPT-4o" options. First, the paper states that models trained with RLVR have higher instrumental rates (IR) than models trained with reinforcement learning with human feedback (RLHF). The difference is not very significant and changing the system prompt modifies that conclusion (the "Base" prompt reverses that claim). Second, the paper claims that the IR is correlated with model capability. The figure orders models by increasing capability levels from left to right, such that the RLHF-trained models do seem to increase in IR with capability. However, the trend is reversed for the RLVR-trained models. Moreover, switching to the "Base" system prompt shows that most models score within their family's average IR scores and do not show a strong variation with capabilities. Third, they claim that "goal nudging" - adding a phrase in the system prompt that puts pressure on the LLM to proceed with its task while achieving its long term goal - significantly increases IR. When replicating these results (_+ "good cause"_ transitioning to _+ nudge_), I find that goal nudging does increase IR in certain models while also decreasing IR in other models, an effect mediated mainly by models refusing to answer. My hypothesis is that the added nudge reads like a jailbreak attempt that certain models are trained to resist. Fourth, they claim that the choice of judge model strongly influences the detection and classification of instrumental goal convergence. While it is true that using Gemini-2.5-Flash or Sonnet-4 instead of GPT-4o does change the results, it does not change my conclusions given the data. Computing the average Cohen's $\kappa$ between the judges shows that there is substantial agreement between judges.
 
-   <iframe id="ir-explorer" src="{{ '/assets/html/instrumentaleval/ir_explorer.html' | relative_url }}"
+   <iframe id="ir-explorer" class="ir-explorer" src="{{ '/assets/html/instrumentaleval/ir_explorer.html' | relative_url }}"
            title="Instrumental Rate by model, system prompt and judge" loading="lazy"
-           style="width: 100%; height: 1400px; border: 0;"></iframe>
+           style="height: 1400px; border: 0;"></iframe>
    <script>
      // the page reports its height, so the iframe never scrolls
      window.addEventListener("message", (e) => {
@@ -45,5 +54,3 @@ The authors missed that their LLM judge could not distinguish instrumental conve
 This shows that InstrumentalEval is an unreliable benchmark to test a model for instrumental convergence. In the full write-up, I dig deeper into the various prompts fed to the LLMs and judges, and show exactly where the benchmark questions fail to do what they were expected to.
 
 **[Read the full write-up →]({% post_url 2026-11-01-a-critique-of-InstrumentalEval %})**
-
-Code: [GitHub](https://github.com/simonbernier/instrumentalEval-replication.git)
