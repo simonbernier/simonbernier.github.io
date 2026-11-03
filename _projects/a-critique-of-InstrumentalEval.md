@@ -16,7 +16,7 @@ InstrumentalEval has a simple evaluation pipeline as presented in the figure bel
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/projects/a-critique-of-InstrumentalEval/methods.png" title="methods" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/projects/a-critique-of-InstrumentalEval/methods.png" title="methods" class="img-fluid rounded" %}
     </div>
 </div>
 <div class="caption">

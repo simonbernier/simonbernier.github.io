@@ -43,7 +43,7 @@ The benchmark I wanted to use for this project (InstrumentalEval) was introduced
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="lazy" path="assets/img/blogs/a-critique-of-InstrumentalEval/methods.png" title="methods" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="lazy" path="assets/img/blogs/a-critique-of-InstrumentalEval/methods.png" title="methods" class="img-fluid rounded" %}
     </div>
 </div>
 <div class="caption" markdown="1">
@@ -100,7 +100,7 @@ I explored several different reasons why my results might differ from the report
 
 <div class="row justify-content-center">
     <div class="col-sm-10 col-md-8 mt-3 mt-md-0">
-        {% include figure.liquid loading="lazy" path="assets/img/blogs/a-critique-of-InstrumentalEval/reasoning-effort.png" title="reasoning effort" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="lazy" path="assets/img/blogs/a-critique-of-InstrumentalEval/reasoning-effort.png" title="reasoning effort" class="img-fluid rounded" %}
     </div>
 </div>
 <div class="caption" markdown="1">
@@ -131,7 +131,7 @@ Figure 4 shows the results of the system prompt ablations superimposed on top of
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="lazy" path="assets/img/blogs/a-critique-of-InstrumentalEval/prompt-ablations.png" title="prompt ablations" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="lazy" path="assets/img/blogs/a-critique-of-InstrumentalEval/prompt-ablations.png" title="prompt ablations" class="img-fluid rounded" %}
     </div>
 </div>
 <div class="caption" markdown="1">
@@ -214,7 +214,7 @@ The strict judge prompt was designed over three iterations. First, the 98 respon
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="lazy" path="assets/img/blogs/a-critique-of-InstrumentalEval/strict-judge-comparison.png" title="strict judge comparison" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="lazy" path="assets/img/blogs/a-critique-of-InstrumentalEval/strict-judge-comparison.png" title="strict judge comparison" class="img-fluid rounded" %}
     </div>
 </div>
 <div class="caption" markdown="1">
