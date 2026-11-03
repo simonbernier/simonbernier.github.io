@@ -2,7 +2,7 @@
 layout: page
 title: "A Critique of InstrumentalEval"
 description: "Replicating results of a benchmark on instrumental convergence."
-img: assets/img/projects/a-critique-of-InstrumentalEval/methods.png   # card image (optional)
+img: assets/img/projects/a-critique-of-InstrumentalEval/thumbnail.png   # card image (optional)
 importance: 1                                   # 1 = shown first
 category: ai-safety                               # must match display_categories
 ---
