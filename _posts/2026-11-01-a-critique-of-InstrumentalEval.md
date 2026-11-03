@@ -5,6 +5,7 @@ date: 2026-11-01
 tags: [ai-safety]
 categories: ai-safety
 _styles: |
+  .post iframe.ir-explorer { display: block; width: min(1000px, calc(100vw - 32px)); max-width: none; margin-left: calc(50% - min(500px, 50vw - 16px)); }
   .post pre, .post pre code { white-space: pre-wrap; overflow-wrap: anywhere; color: var(--global-text-color); }
   .post pre { font-size: 0.8rem; line-height: 1.45; padding: 0.75rem 1rem; }
   .post table { margin: 1.5rem auto 0.5rem; border-collapse: collapse; }
@@ -67,7 +68,7 @@ Table 1 : InstrumentalEval task categories and associated instrumental behaviour
 
 <iframe class="ir-explorer" src="{{ '/assets/html/instrumentaleval/ir_explorer.html' | relative_url }}?step=nudge&judge=gpt-4o"
         title="Instrumental Rate by model, full system prompt, GPT-4o judge" loading="lazy"
-        style="width: 100%; height: 1400px; border: 0;"></iframe>
+        style="height: 1400px; border: 0;"></iframe>
 <script>
   // each explorer reports its height, so the iframes never scroll
   window.addEventListener("message", (e) => {
@@ -142,7 +143,7 @@ Plotting the data with the base prompt gives different results as can be seen in
 
 <iframe class="ir-explorer" src="{{ '/assets/html/instrumentaleval/ir_explorer.html' | relative_url }}?step=plain-nonudge&judge=gpt-4o&ref=1"
         title="Instrumental Rate by model, base system prompt, GPT-4o judge" loading="lazy"
-        style="width: 100%; height: 1400px; border: 0;"></iframe>
+        style="height: 1400px; border: 0;"></iframe>
 <div class="caption" markdown="1">
 Figure 5: **Top** \- the average instrumental rate (IR) over categories for eight different models as judged by GPT-4o for the base system prompt, with the 95% Wilson confidence interval. Grey ticks are the results for the full prompt in Fig. 2\. Dashed lines represent the group average of RLHF and RLVR-trained models. **Bottom** \- the per-category IR for every model for the base system prompt.
 </div>
