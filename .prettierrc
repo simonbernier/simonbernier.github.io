@@ -1,3 +1,5 @@
 plugins: ["@shopify/prettier-plugin-liquid"]
 printWidth: 150
 trailingComma: "es5"
+# keep each file's line endings: CI checks out LF, a Windows working copy has CRLF
+endOfLine: "auto"

@@ -1,0 +1,19 @@
+# Opens a monthly pull request when GitHub Actions or the npm tools (Prettier) used by the workflows have new versions.
+# The pull request runs the build and the Prettier check, so a version that breaks something shows up there instead of on main.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      github-actions:
+        patterns: ["*"]
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      prettier:
+        patterns: ["*"]
