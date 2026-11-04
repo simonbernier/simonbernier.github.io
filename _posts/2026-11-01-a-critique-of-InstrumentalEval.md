@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "A Critique of InstrumentalEval"
+description: "Replicating the InstrumentalEval benchmark revealed a jailbreak-style system prompt, a judge that cannot tell instrumental convergence from instruction following, and tasks that instruct the behaviour they measure."
 date: 2026-11-01
 tags: [ai-safety]
 categories: ai-safety
