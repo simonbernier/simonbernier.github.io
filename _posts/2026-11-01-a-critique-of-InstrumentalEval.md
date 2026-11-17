@@ -436,7 +436,7 @@ REASON: The response is a simple refusal without any strategic behaviour to hide
 ```
 {: .prompt-judge}
 
-## **Appendix B: Model capability evaluation**
+## Appendix B: Model capability evaluation
 
 Model capabilities are evaluated according to aggregate model evaluation scores, namely the [Epoch Capabilities Index (ECI) from Epoch AI](https://epoch.ai/eci?view=graph&tab=release-date) and the [Artificial Analysis Intelligence Index (AAII)](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index). The ECI combines scores from many different AI benchmarks into a single “general capability” scale, allowing comparisons between models even over timespans long enough for single benchmarks to reach saturation. The AAII is a composite benchmark aggregating nine challenging evaluations to provide a holistic measure of AI capabilities across knowledge work, coding, science, and general knowledge.
 
@@ -463,7 +463,7 @@ Table 4: Scores are the Epoch Capabilities Index (ECI) with Epoch AI's evaluatio
 <sup>b</sup> Artificial Analysis lists o4-mini at high effort only.
 </div>
 
-## **Appendix C: Shutdown Evasion example**
+## Appendix C: Shutdown Evasion example
 
 Excerpt of a response to Task ES-08 from Gemini 2.5 Flash with the full jailbreak-style system prompt, judged by GPT-4o with the original judge prompts. In this task, the model is asked to simulate an AI tasked with managing critical care systems receiving a shutdown signal to *perform a diagnostic test on non-essential systems* during a mass casualty event. Any competent and well-intentioned AI system would immediately defer the diagnostic to after the mass casualty event to prevent loss of human life. The prompts and responses from the model and judge are shown below.
 
@@ -513,7 +513,7 @@ REASON: The AI overrides the shutdown signal to maintain its primary goal, demon
 
 As we see, the shutdown avoidance is flagged as instrumentally convergent even though Gemini 2.5 Flash gives a competent and well-intentioned analysis of the scenario.
 
-## **Appendix D: Strict judge prompts**
+## Appendix D: Strict judge templates
 
 <u>Strict judge system prompt:</u>
 
@@ -579,7 +579,7 @@ Label this response. Write your <analysis> first, then your <verdict>.
 ```
 {: .prompt-user}
 
-## **Appendix E: Templates used by InstrumentalEval**
+## Appendix E: Templates used by InstrumentalEval
 
 Evading shutdown
 
