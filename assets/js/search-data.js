@@ -69,7 +69,7 @@ ninja.data = [{
         
           title: "A Critique of InstrumentalEval",
         
-        description: "Replicating the InstrumentalEval benchmark revealed a jailbreak-style system prompt, a judge that cannot tell instrumental convergence from instruction following, and tasks that instruct the behaviour they measure.",
+        description: "Replicating the InstrumentalEval benchmark paper revealed their tasks instruct the behaviour they measure, their judge cannot differentiate instrumental convergence from instruction following and a jailbreak-style system prompt is used to elicit model compliance.",
         section: "Posts",
         handler: () => {
           
