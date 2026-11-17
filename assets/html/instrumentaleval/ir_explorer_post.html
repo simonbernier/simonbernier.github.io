@@ -364,16 +364,23 @@ const DATA = {"generated":"2026-11-03","n_tasks":76,"families":{"RLHF":{"name":"
     const to = new Map(panels.map(p => [p.row, target(p)]));
     const from = new Map(panels.map(p => [p.row, shown.get(p.row) || to.get(p.row)]));
     if (anim) cancelAnimationFrame(anim);
-    const t0 = performance.now(), dur = animate && !reduced ? DURATION : 0;
+    const dur = animate && !reduced ? DURATION : 0;
+    const step = t => panels.forEach(p => {
+      const S = mix(from.get(p.row), to.get(p.row), ease(t));
+      drawPanel(p, S); shown.set(p.row, S);
+    });
+    if (!dur) { step(1); anim = null; return; }
+    // time the tween with the animation-frame clock only: it can disagree with performance.now() (throttled or
+    // lazy-loaded iframes), and a negative t sends the cubic easing far outside [0, 1]
+    let t0 = null;
     const frame = now => {
-      const t = dur ? Math.min(1, (now - t0) / dur) : 1;
-      panels.forEach(p => {
-        const S = mix(from.get(p.row), to.get(p.row), ease(t));
-        drawPanel(p, S); shown.set(p.row, S);
-      });
+      if (t0 === null) t0 = now;
+      const t = Math.min(1, Math.max(0, (now - t0) / dur));
+      step(t);
       anim = t < 1 ? requestAnimationFrame(frame) : null;
     };
-    frame(t0);
+    step(0);
+    anim = requestAnimationFrame(frame);
   }
 
   // ---------------------------------------------------------------- text around the chart

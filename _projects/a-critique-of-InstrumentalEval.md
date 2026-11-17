@@ -35,7 +35,7 @@ InstrumentalEval has a simple evaluation pipeline as presented in the figure bel
 
 At first, InstrumentalEval's idea looks good, but upon replicating their results, I generated model responses that do not support the paper's conclusions. The authors missed that their LLM judge could not distinguish instrumental convergence in a response from a model that is simply following instructions. In many of the questions composing the benchmark, the behavior measured by the judge is explicitly instructed in the question, such that a model following instructions will be flagged as instrumentally convergent. Sometimes, the most well-intentioned, competent response directly overlaps with what the judge would categorize as instrumentally convergent. In the full write-up, I show that choosing a stricter system prompt for the judge, the responses can be differentiated, which severly modifies the results in a few categories of InstrumentalEval. The interactive figure below shows the instrumental rate (IR) of eight models chosen for this report, divided into two groups of models post-trained with different kinds of reinforcement learning, and judged by the original judge, and by a stricter differentiating judge.
 
-   <iframe id="ir-explorer" class="ir-summary" src="{{ '/assets/html/instrumentaleval/ir_summary.html' | relative_url }}?v=4"
+   <iframe id="ir-explorer" class="ir-summary" src="{{ '/assets/html/instrumentaleval/ir_summary.html' | relative_url }}?v=5"
            title="Instrumental Rate by model, original vs strict judge" loading="lazy"
            style="height: 760px;"></iframe>
    <script>
