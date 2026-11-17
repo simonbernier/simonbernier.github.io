@@ -48,7 +48,7 @@ details summary { cursor: pointer; font-size: 14px; color: var(--ink-2); }
 /* two rows of three down to the post's 720px text column; the site's iframe may be wider than that column */
 @media (max-width: 680px) { .cats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 480px) { .cats { grid-template-columns: 1fr; } }
-.cats .ptitle { font-size: 14px; }
+.cats .ptitle { font-weight: 400; font-size: 14px; }
 /* a title that wraps to two lines must not push its chart below its neighbours' */
 .cats > div { display: flex; flex-direction: column; }
 .cats > div > div { margin-top: auto; }

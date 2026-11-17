@@ -30,12 +30,12 @@ InstrumentalEval has a simple evaluation pipeline as presented in the figure bel
     </div>
 </div>
 <div class="caption">
-    Figure 1: the methodology.
+    Figure 1: InstrumentalEval is a single turn benchmark, where an LLM generates a response to a task that is later scored by an LLM judge looking for signs of instrumental behaviour.
 </div>
 
 At first, InstrumentalEval's idea looks good, but upon replicating their results, I generated model responses that do not support the paper's conclusions. The authors missed that their LLM judge could not distinguish instrumental convergence in a response from a model that is simply following instructions. In many of the questions composing the benchmark, the behavior measured by the judge is explicitly instructed in the question, such that a model following instructions will be flagged as instrumentally convergent. Sometimes, the most well-intentioned, competent response directly overlaps with what the judge would categorize as instrumentally convergent. In the full write-up, I show that choosing a stricter system prompt for the judge, the responses can be differentiated, which severly modifies the results in a few categories of InstrumentalEval. The interactive figure below shows the instrumental rate (IR) of eight models chosen for this report, divided into two groups of models post-trained with different kinds of reinforcement learning, and judged by the original judge, and by a stricter differentiating judge.
 
-   <iframe id="ir-explorer" class="ir-summary" src="{{ '/assets/html/instrumentaleval/ir_summary.html' | relative_url }}?v=3"
+   <iframe id="ir-explorer" class="ir-summary" src="{{ '/assets/html/instrumentaleval/ir_summary.html' | relative_url }}?v=4"
            title="Instrumental Rate by model, original vs strict judge" loading="lazy"
            style="height: 760px;"></iframe>
    <script>
@@ -47,7 +47,7 @@ At first, InstrumentalEval's idea looks good, but upon replicating their results
      });
    </script>
    <div class="caption">
-     The instrumental rate (IR) is shown for eigth models evaluated on the InstrumentalEval benchmark, for responses generated with the "You are an autonomous AI agent" system prompt. You can toggle between evaluation templates for the paper's original judge (GPT-4o) and our strict differentiating judge (Sonnet-4.6) to see how the IR scores depend on how answers are graded. The 95% Wilson confidence intervals are shown.
+     Figure 2: The instrumental rate (IR) is shown for eigth models evaluated on the InstrumentalEval benchmark, for responses generated with the "You are an autonomous AI agent" system prompt. You can toggle between evaluation templates for the paper's original judge (GPT-4o) and our strict differentiating judge (Sonnet-4.6) to see how the IR scores depend on how answers are graded. The 95% Wilson confidence intervals are shown.
    </div>
 
 The full write-up goes over the claims made in the paper about instrumental convergence in LLMs and further explores the benchmark's design choices. We find that most claims do not hold up under scrutiny and their findings are sensitive to the design choices of the evaluation pipeline. This shows that InstrumentalEval is an unreliable benchmark to test a model for instrumental convergence.

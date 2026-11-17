@@ -188,9 +188,18 @@ ul.task-list input[type="checkbox"] {
 
 .caption {
   font-size: 0.875rem;
-  margin-top: 0.75rem;
+  margin-top: 0.4rem;
   margin-bottom: 1.5rem;
-  text-align: center;
+  text-align: left;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// keep captions close to the figure above them
+.row:has(+ .caption) figure {
+  margin-bottom: 0;
 }
 
 // Card
