@@ -8,10 +8,10 @@ importance: 5
 category: ai-safety
 ---
 
-> **Status: in progress.**
+> ***Status: in progress.***
 > <!-- TODO: one line on where this stands. -->
 {: .block-tip }
 
-To extend the results of [Evaluation Awareness in OLMo 3]({% link _projects/eval-awareness-in-olmo-3.md %}), I am fitting a Jacobian lens (j-lens) to OLMo 3 and using it to study how evaluation awareness changes throughout post-training with reinforcement learning. It builds on the j-lens readouts from [Filler Token Uplift in DeepSeek V4 Flash]({% link _projects/filler-token-uplift.md %}).
+*To extend the results of [Evaluation Awareness in OLMo 3]({% link _projects/eval-awareness-in-olmo-3.md %}), I am fitting a Jacobian lens (j-lens) to OLMo 3 and using it to study how evaluation awareness changes throughout post-training with reinforcement learning. It builds on the j-lens readouts from [Filler Token Uplift in DeepSeek V4 Flash]({% link _projects/filler-token-uplift.md %}).*
 
 <!-- TODO: fitting procedure, checkpoints used and first results. -->

@@ -8,7 +8,7 @@ importance: 2
 category: ai-safety
 ---
 
-> **Status: in progress.** The behavioural results and a first j-lens readout are done. The j-lens currently performs about as well as the logit lens; the next step is to look at top-k tokens instead of only the top token.
+> ***Status: in progress.*** *The behavioural results and a first j-lens readout are done. The j-lens currently performs about as well as the logit lens; the next step is to look at top-k tokens instead of only the top token.*
 {: .block-tip }
 
 My first project focused on using a new interpretability method to understand how adding meaningless, filler tokens at the end of a question increased model performance on non-reasoning tasks in a large number of frontier large language models (LLMs) ([Greenblatt, 2025](https://www.lesswrong.com/posts/NYzYJ2WoB74E6uj9L)). I first replicated the methods from a paper that applied a logit lens to DeepSeek V3 and Kimi-K2 ([Brauer et. al., 2026](https://arxiv.org/pdf/2607.03502)) and found that in these models, attention routes the question through filler tokens to the answer and that logit-lens readouts show that retrieved facts appear early at filler token positions and help with answer composition in late layers. My own results are similar and show that j-lens performs about equally as logit-lens on readouts. I attribute this to an improper use of j-lens on my part, which could be improved by looking at top-k tokens to fully explore the model's workspace ([Gurnee et. al., 2026](https://transformer-circuits.pub/2026/workspace/index.html)).
