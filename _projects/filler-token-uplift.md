@@ -1,15 +1,13 @@
 ---
 layout: page
-# Draft: not built on the live site. Preview with `bundle exec jekyll serve --unpublished`.
-published: false
+published: false # Preview with `bundle exec jekyll serve --unpublished`.
 title: "Filler Token Uplift in DeepSeek V4 Flash"
-description: "Reading out how meaningless filler tokens help a model compose recalled facts, with a Jacobian lens."
+description: "Using a Jacobian lens to read how filler tokens help models perform better fact composition tasks."
 importance: 2
 category: ai-safety
 ---
 
-> ***Status: in progress.*** *The behavioural results and a first j-lens readout are done. The j-lens currently performs about as well as the logit lens; the next step is to look at top-k tokens instead of only the top token.*
-{: .block-tip }
+> ***Status: in progress.***
 
 My first project focused on using a new interpretability method to understand how adding meaningless, filler tokens at the end of a question increased model performance on non-reasoning tasks in a large number of frontier large language models (LLMs) ([Greenblatt, 2025](https://www.lesswrong.com/posts/NYzYJ2WoB74E6uj9L)). I first replicated the methods from a paper that applied a logit lens to DeepSeek V3 and Kimi-K2 ([Brauer et. al., 2026](https://arxiv.org/pdf/2607.03502)) and found that in these models, attention routes the question through filler tokens to the answer and that logit-lens readouts show that retrieved facts appear early at filler token positions and help with answer composition in late layers. My own results are similar and show that j-lens performs about equally as logit-lens on readouts. I attribute this to an improper use of j-lens on my part, which could be improved by looking at top-k tokens to fully explore the model's workspace ([Gurnee et. al., 2026](https://transformer-circuits.pub/2026/workspace/index.html)).
 
@@ -24,7 +22,7 @@ The task for the LLM is to add two numbers together, where those numbers must be
 Figure 1: Accuracy of DeepSeek V4 Flash on (a) 1-fact addition tasks and (b) 2-fact addition tasks for various filler tokens, compared to available data from DeepSeek V3 and Kimi-K2. Error bars show the 95% Wilson confidence intervals for (a) n=800 tasks and (b) n=1500 tasks.
 </div>
 
-Following the methodology in ([Brauer et. al., 2026](https://arxiv.org/pdf/2607.03502)), I then do a readout of the residual stream with a fitted j-lens ([Blanks et. al., 2026](https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers)) at every layer and filler and answer block token positions.
+Following the methodology in ([Brauer et. al., 2026](https://arxiv.org/pdf/2607.03502)), I then do a top-token readout of the residual stream with a fitted j-lens ([Blanks et. al., 2026](https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers)) at every layer and filler and answer block token positions. I plot where the top-token corresponds to either the first number ($A_1$), the second number ($A_2$) or their sum ($A_1+A_2$) for responses that produced correct and incorrect answers, as shown in Fig 2\. As can be seen, the rates at which the model recalls each fact individually across filler tokens is quite similar if the model answers correctly or incorrectly as shown in panels (a), (b), (d) and (e). The model succeeds if it manages to compose these two numbers together as shown in panels (c) and (f). Here, we see that a model that answers correctly recalls the token $A_1 + A_2$ in the filler tokens while it does not do so when answering incorrectly. Moreover, $A_1 + A_2$ does not appear at all in the last answer prompt when answering incorrectly. What I find very interesting is when comparing $k=10$ to readouts without filler tokens, we see little difference between rates in the token readouts. As such, we cannot tell how the $A_1$ and $A_2$ readouts affect the likelihood of the composition of $A_1 + A_2$.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -35,11 +33,15 @@ Following the methodology in ([Brauer et. al., 2026](https://arxiv.org/pdf/2607.
 Figure 2: Fraction of examples in which the top token decoded by j-lens is the first fact's number (A1), the second fact's number (A2) or their sum (A1 + A2) at each token position and layer, for examples answered correctly (a-c) and incorrectly (d-f). Positions are the 10 filler dots followed by the `Answer` block given to the model. The (k = 0) colorplots show the same final positions without filler dots.
 </div>
 
+The work done by ([Brauer et. al., 2026](https://arxiv.org/pdf/2607.03502)) suggests that the early retrieval of numbers helps cristallize their composition in late layers. Our work shows that the filler token readouts are often used to retrieve facts in the final layers of the LLM and the answer is mostly composed in the 3-4 last layers, as shown in Fig 3\. The j-lens readouts and logit-lens readouts of top-tokens barely differ in this experiment for DeepSeek V4 Flash as the bottom panel indicates. As such, the way I did this j-lens study does not allow me to shed new light into the mechanism that powers filler token uplift. 
+
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="lazy" path="assets/img/projects/filler-token-uplift/jlens_deepseekV4.png" title="j-lens decoding by layer" class="img-fluid rounded" %}
+        {% include figure.liquid loading="lazy" path="assets/img/projects/filler-token-uplift/jlens_deepseekV4_correct.png" title="j-lens decoding by layer" class="img-fluid rounded" %}
     </div>
 </div>
 <div class="caption" markdown="1">
-Figure 3: (a) Percentage of examples decoded at the last filler dot position by the j-lens at each layer of DeepSeek V4 Flash with k = 10 filler dots for A1, A2 and A1 + A2, compared to a shuffled control. (b) Difference between the j-lens and logit-lens decoding rates at each layer at the final filler token position. The grey band shows the 95% chance range for paired comparisons.
+Figure 3: (a) Percentage of correct examples decoded at the last filler dot position by the j-lens at each layer of DeepSeek V4 Flash with k = 10 filler dots for A1, A2 and A1 + A2, compared to a shuffled control. (b) Difference between the j-lens and logit-lens decoding rates at each layer at the final filler token position. The grey band shows the 95% chance range for paired comparisons.
 </div>
+
+My final goal with this project would be to find how non-reasoning models can benefit from filler tokens. This might demonstrate a method by which models can hide away computations that are never revealed in their CoTs, an important result for CoT monitorability. To solve this, I think I need to look at top-k token readouts with the j-lens, accompanied by their respective logits. My hypothesis is that early retrieval of information at filler token positions leaks probability mass towards the answer thus making the composition circuit fire more often, leading to an increase in accuracy on the fact composition tasks.  

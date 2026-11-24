@@ -8,15 +8,13 @@ tags: [evals, training dynamics, j-lens, interpretability, open language models,
 categories: [ai-safety, physics]
 ---
 
-Thanks to a Coefficient Giving grant, I have been exploring the field of AI safety for the last few months. My very first project was exploring filler token uplift in DeepSeek V4 Flash with a j-lens and was done as part of applying to Neel Nanda's MATS stream. After doing the September edition of the Iliad Intensive in London, I decided to explore the field of training dynamics as a way to do theoretical AI alignment work. My hope was that my academic background in dynamical quantum phase transitions would be of substantial help in helping out in that area of research (it is still unclear to me how). In October, I did Bluedot's Technical AI Safety Project, where I decided to do a small project evaluating misalignment in open language models. This led to two separate projects when I found flaws in one benchmark ([A Critique of InstrumentalEval]({% link _projects/a-critique-of-InstrumentalEval.md %})) and then replicated work on evaluation awareness in OLMo 3. To extend the results I obtained, I decided to fit a Jacobian lens to OLMo 3 and use it to study how eval awareness changes throughout post-training with reinforcement learning. I've also explored how frontier language models can help me with theoretical and experimental research. To explore in known territory and validate the results, I threw Claude at the research I did in physics. *This blog post gives a quick overview of each project and how (in)complete it is. Each one has its own project page, which will be updated as the work progresses.*
+Thanks to a Coefficient Giving grant, I have been exploring the field of AI safety for the last few months. My very first project was exploring filler token uplift in DeepSeek V4 Flash with a j-lens and was done as part of applying to Neel Nanda's MATS stream. After doing the September edition of the Iliad Intensive in London, I decided to explore the field of training dynamics as a way to do theoretical AI alignment work. My hope was that my academic background in dynamical quantum phase transitions would be of substantial help in helping out in that area of research (it is still unclear to me how). In October, I did Bluedot's Technical AI Safety Project, where I decided to do a small project evaluating misalignment in open language models. This led to two separate projects when I found flaws in one benchmark ([A Critique of InstrumentalEval]({% link _projects/a-critique-of-InstrumentalEval.md %})) and then replicated work on evaluation awareness in OLMo 3. To extend the results I obtained, I decided to fit a Jacobian lens to OLMo 3 and use it to study how eval awareness changes throughout post-training with reinforcement learning. I've also explored how frontier language models can help me with theoretical and experimental research. To explore in known territory and validate the results, I used Claude to revisist the research I did in physics. This post describes the idea behind each project and thier various states of (in)completeness. Each of these projects have their own page, which will be updated as the work progresses and will eventually become their own blog post.
 
 ## Filler Token Uplift in DeepSeek V4 Flash
 
-*Adding meaningless filler tokens after a question makes many frontier LLMs better at answering it without reasoning. I replicated a logit-lens study of this effect on DeepSeek V4 Flash, using two-fact addition tasks where the model must recall two numbers and add them in a single pass. DeepSeek V4 Flash gains about 10% accuracy from filler tokens, and the recalled facts show up at the filler positions, as in DeepSeek V3 and Kimi-K2.*
+It was discovered that adding meaningless tokens after a question improved frontier large language model (LLM) performance on mathematical tasks ([Greenblatt, 2025](https://www.lesswrong.com/posts/NYzYJ2WoB74E6uj9L)). I replicated a study that used logit-lens to understand how DeepSeek V3 and Kimi-K2 use filler tokens to improve their performance on a variety of tasks ([Brauer et. al., 2026](https://arxiv.org/pdf/2607.03502)), and extended some of their results to DeepSeek V4 Flash. I focused on two-fact addition tasks, where the model scores 10% higher with filler tokens where it must recall and then add two numbers from Greenblatt's *compose facts* repo ([Greenblatt, 2025](https://github.com/rgreenblatt/compose_facts)). I use a j-lens fitted to DeepSeek V4 Flash ([Blanks et. al., 2026](https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers)) and do top-token readouts during forward passes at every filler token position and each layer. The j-lens faithfully reproduces previous results but fails to improve upon logit-lens results for top-token readouts. This is the main limitation of this project and the next step is to do top-k token readouts to fully inspect the model's workspace during forward passes ([Gurnee et. al., 2026](https://transformer-circuits.pub/2026/workspace/index.html)).
 
-**Status:** *behavioural results and a first j-lens readout are done. The j-lens currently does no better than the logit lens, which I think comes from only looking at the top token. Next is a top-k readout.*
-
-**[Project page →]({% link _projects/filler-token-uplift.md %})**
+**[Filler token uplift project page →]({% link _projects/filler-token-uplift.md %})**
 
 ## Inductive Bias under Muon
 
@@ -26,7 +24,7 @@ Thanks to a Coefficient Giving grant, I have been exploring the field of AI safe
 
 **Status:** <!-- TODO -->
 
-**[Project page →]({% link _projects/inductive-bias-under-muon.md %})**
+**[Inductive bias under Muon project page →]({% link _projects/inductive-bias-under-muon.md %})**
 
 ## Evaluation Awareness in OLMo 3
 
@@ -36,7 +34,7 @@ Thanks to a Coefficient Giving grant, I have been exploring the field of AI safe
 
 **Status:** <!-- TODO -->
 
-**[Project page →]({% link _projects/eval-awareness-in-olmo-3.md %})**
+**[Evaluation awareness in OLMo 3 project page →]({% link _projects/eval-awareness-in-olmo-3.md %})**
 
 ## Fitting a J-lens on OLMo 3
 
@@ -44,7 +42,7 @@ Thanks to a Coefficient Giving grant, I have been exploring the field of AI safe
 
 **Status:** <!-- TODO -->
 
-**[Project page →]({% link _projects/j-lens-on-olmo-3.md %})**
+**[OLMo 3 j-lens project page →]({% link _projects/j-lens-on-olmo-3.md %})**
 
 ## Automating Theoretical Research in Physics
 
@@ -52,6 +50,6 @@ Thanks to a Coefficient Giving grant, I have been exploring the field of AI safe
 
 **Status:** <!-- TODO --> *This will become a series of blog posts.*
 
-**[Project page →]({% link _projects/automating-theoretical-physics-research.md %})**
+**[Automatic theoretical research in physics →]({% link _projects/automating-theoretical-physics-research.md %})**
 
 ## What's next?
