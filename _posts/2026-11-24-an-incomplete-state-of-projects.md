@@ -14,23 +14,21 @@ Thanks to a Coefficient Giving grant, I have been exploring the field of AI safe
 
 It was discovered that adding meaningless tokens after a question improved frontier large language model (LLM) performance on mathematical tasks ([Greenblatt, 2025](https://www.lesswrong.com/posts/NYzYJ2WoB74E6uj9L)). I replicated a study that used logit-lens to understand how DeepSeek V3 and Kimi-K2 use filler tokens to improve their performance on a variety of tasks ([Brauer et. al., 2026](https://arxiv.org/pdf/2607.03502)), and extended some of their results to DeepSeek V4 Flash. I focused on two-fact addition tasks, where the model scores 10% higher with filler tokens where it must recall and then add two numbers from Greenblatt's *compose facts* repo ([Greenblatt, 2025](https://github.com/rgreenblatt/compose_facts)). I use a j-lens fitted to DeepSeek V4 Flash ([Blanks et. al., 2026](https://www.lesswrong.com/posts/nv8oedrnLXKRzNEL9/r-lens-making-j-lens-more-faithful-on-early-layers)) and do top-token readouts during forward passes at every filler token position and each layer. The j-lens faithfully reproduces previous results but fails to improve upon logit-lens results for top-token readouts. This is the main limitation of this project and the next step is to do top-k token readouts to fully inspect the model's workspace during forward passes ([Gurnee et. al., 2026](https://transformer-circuits.pub/2026/workspace/index.html)).
 
+**Status: unsure** I'm still quite interested in chain of thought monitorability, but I'm not sure what more there is to learn with a J-lens in DeepSeek V4 Flash. I think this kind of work would be quite interesting in looped transformers ([cite,xxx]()). I could repeat some of this work on small open-weight looped tranformers and check if logit lens reveals the underlying computations. I would only fit a j-lens if logit lens performs badly. In reality, this type of study would be most interesting on a model like GLM-5.4, which is a known looped transformer model. Their website mentions they will release the weights once they harden the model's security.
+
 **[Filler token uplift project page →]({% link _projects/filler-token-uplift.md %})**
 
 ## Inductive Bias under Muon
 
-*A first step into training dynamics, the area I picked after the Iliad Intensive as a way to do theoretical alignment work.*
+In this project, I investigate the effect of Muon, an optimizer based on spectral gradient descent, on a model's training dynamics in a Toy Model of Superposition. I find that Muon preserves the inductive bias of the data and that can be observed in phase transitions during training. Because Muon is an efficient optimizer, certain phase transitions are very short lived and difficult to resolve. Removing the inductive bias in the data, Muon learns every feature at the same time, which makes the phase transitions impossible to resolve. *what about gradient descent here?* This is good news for singular learning theory's Bayesian Antecedent Hypothesis, which compares the dynamics of learning in neural networks trained with gradient descent to Bayesian learning in the same network.
 
-<!-- TODO: one or two sentences on the question. -->
-
-**Status:** <!-- TODO -->
+**Status: ongoing** The Toy Model of Superposition (TMS) is a good system to study this because learning coefficients are computed exactly, giving a good comparative test for our findings. I still need to properly understand the TMS and the learned k-gons, and how the local learning coefficients (LLCs) are computed. Moreover, there was a challenge with computing the LLC numerically as the methods I tried did not converge and stayed quite far from the accepted values. The research is a bit old (2023) and a better test could be done on more realistic models that do not require superposition, since polysemanticity does not seem to be a property of every neuron in modern LLMs ([Goodfire,2026]()).
 
 **[Inductive bias under Muon project page →]({% link _projects/inductive-bias-under-muon.md %})**
 
 ## Evaluation Awareness in OLMo 3
 
-*A replication of work on evaluation awareness on OLMo 3, whose checkpoints across post-training make it possible to track how evaluation awareness changes.*
-
-<!-- TODO: one or two sentences on what was replicated and what came out. -->
+This project grew out of BlueDot's Technical AI Safety Project Sprint, alongside [A Critique of InstrumentalEval]({% link _projects/a-critique-of-InstrumentalEval.md %}). OLMo 3 releases checkpoints across supervised fine-tuning, direct preference optimization and reinforcement learning with verifiable reward, which makes it a good platform to replicate work on evaluation awareness and see how it changes through post-training.
 
 **Status:** <!-- TODO -->
 
