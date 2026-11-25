@@ -2,7 +2,7 @@
 layout: post
 published: false
 title: "An Incomplete State of Projects"
-description: "A preview of what is currently on the boilerplate"
+description: "A preview of what I'm currently working on."
 date: 2026-11-24
 tags: [evals, training dynamics, j-lens, interpretability, open language models, phase transitions]
 categories: [ai-safety, physics]
